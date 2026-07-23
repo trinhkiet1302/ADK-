@@ -1,37 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập ExpiryCheck</title>
+    <link rel="stylesheet" href="login.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     />
-    <title>ExpiryCheck – Website Kiểm Tra Hạn Sử Dụng Của Sản Phẩm</title>
-  </head>
-  <body>
-    <header class="header">
-      <h1>ExpiryCheck - Website Kiểm Tra Hạn Sử Dụng Của Sản Phẩm</h1>
-      <div class="navbar">
-        <div class="logo">
-          <i class="fa-regular fa-calendar-check"></i>
-          <span>ExpiryCheck</span>
+</head>
+<body class="login-body">
+    <div class="login-box">
+        <div class="login-logo">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h2>ExpiryCheck</h2>
         </div>
-        <nav>
-          <ul class="nav-links">
-            <li><a href="#" class="active">Trang Chủ</a></li>
-            <li><a href="#">Kiểm Tra Ngay</a></li>
-            <li><a href="#">Tính Năng</a></li>
-            <li><a href="#">Hướng Dẫn</a></li>
-            <li><a href="#">Giới Thiệu</a></li>
-          </ul>
-        </nav>
-        <a class="nutBam" href="#">Đăng Nhập | Đăng Ký</a>
-      </div>
-    </header>
-  </body>
+
+        <h3>Đăng Nhập</h3>
+        <form id = "loginForm">
+            <div class="input">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id = "username" placeholder="Tên đăng nhập">
+            </div>
+            <div class="input">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id = "password" placeholder="Mật khẩu">
+            </div>
+            <p class = "error-msg" id = "errorMsg"></p>
+            <button type="submit">
+                Đăng Nhập
+            </button>
+            <p>
+                Chưa có tài khoản?
+                <a href="dangky.html">Đăng ký</a>
+            </p>
+        </form>
+    </div>
+    <script src = "auth.js"></script>
+    <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const errorEl = document.getElementById("errorMsg");
+        errorEl.textContent = "";
+        if (!username || !password) {
+            errorEl.textContent = "Vui lòng nhập tên đăng nhập và mật khẩu.";
+            return;
+        }
+        const result = loginUser(username, password);
+        if (!result.success) {
+            errorEl.textContent = result.message;
+            return;
+        }
+        window.location.href = "index.html";
+    });
+    </script>
+</body>
 </html>

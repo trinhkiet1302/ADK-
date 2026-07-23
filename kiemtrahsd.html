@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpiryCheck - Website Kiểm Tra Hạn Sử Dụng Của Sản Phẩm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <link rel="stylesheet" href="kthsd.css">
+</head>
+<body>
+
+    <div class="top-title-banner">
+        ExpiryCheck - Website Kiểm Tra Hạn Sử Dụng Của Sản Phẩm
+    </div>
+
+    <header>
+        <a href="#" class="logo"><i class="fa-regular fa-calendar-check"></i> ExpiryCheck</a>
+        <nav>
+            <ul>
+                <li><a href="#"><i class="fa-solid fa-house"></i> Trang Chủ</a></li>
+                <li><a href="#" class="active"><i class="fa-solid fa-magnifying-glass"></i> Kiểm Tra Ngay</a></li>
+                <li><a href="#"><i class="fa-solid fa-star"></i> Tính Năng</a></li>
+                <li><a href="#"><i class="fa-solid fa-book"></i> Hướng Dẫn</a></li>
+                <li><a href="#"><i class="fa-solid fa-circle-info"></i> Giới Thiệu</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="auth-btn"><i class="fa-solid fa-user-lock"></i> Đăng Nhập | Đăng Ký</a>
+    </header>
+    <section class="hero-bg">
+        <div class="welcome-badge"><i class="fa-solid fa-bolt"></i> Hệ thống nhận diện thời gian thực</div>
+        <h1 class="hero-text-main">Kiểm Tra Hạn Sử Dụng</h1>
+    </section>
+    <div class="check-card">
+        <h2 class="card-title"><i class="fa-solid fa-clipboard-check"></i> KIỂM TRA HẠN SỬ DỤNG SẢN PHẨM</h2>
+
+        <div class="tab-bar">
+            <button id="btn-tab-scan" class="tab-btn" onclick="switchTab('scan')">
+                <i class="fa-solid fa-qrcode"></i> Quét Mã QR / Barcode
+            </button>
+            <button id="btn-tab-manual" class="tab-btn active" onclick="switchTab('manual')">
+                <i class="fa-solid fa-pen-to-square"></i> Nhập Thủ Công
+            </button>
+        </div>
+        <div id="scanner-container">
+            <div id="reader"></div>
+            <p style="margin-top: 12px; color:#666; font-size:13px;">
+                <i class="fa-solid fa-camera"></i> Đưa mã QR của sản phẩm vào trước khung quét camera để nhận diện tự động.
+            </p>
+        </div>
+        <div class="manual-form-content">
+            <div class="form-group">
+<label><i class="fa-solid fa-box-open"></i> Tên sản phẩm</label>
+                <input type="text" id="prodName" class="form-control" placeholder="Ví dụ: Sữa tươi Vinamilk, Kem chống nắng...">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-calendar-day"></i> Ngày sản xuất (NSX)</label>
+                    <input type="date" id="prodNSX" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-calendar-xmark"></i> Ngày hết hạn (HSD)</label>
+                    <input type="date" id="prodHSD" class="form-control">
+                </div>
+            </div>
+
+            <button class="btn-submit-check" onclick="checkExpiryDate()">
+                <i class="fa-solid fa-circle-play"></i> BẮT ĐẦU KIỂM TRA
+            </button>
+        </div>
+        <div id="resultBox" class="result-alert"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

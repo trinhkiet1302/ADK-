@@ -1,0 +1,101 @@
+  <!doctype html>
+  <html lang="vi">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="style.css" />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      />
+      <title>ExpiryCheck – Website Kiểm Tra Hạn Sử Dụng Của Sản Phẩm</title>
+    </head>
+    <body>
+      <header class="header">
+        <div class="navbar">
+          <div class="logo">
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>ExpiryCheck</span>
+          </div>
+          <nav>
+            <ul class="nav-links">
+              <li><a class="active" href="index.html">Trang Chủ</a></li>
+              <li><a href="#" class = "feature-link">Kiểm Tra Ngay</a></li>
+              <li><a href="#">Tính Năng</a></li>
+              <li><a href="#">Hướng Dẫn</a></li>
+              <li><a href="#">Giới Thiệu</a></li>
+            </ul>
+          </nav>
+        <div id = "navAuth">
+          <a class="nutBam" href="dangnhap.html">Đăng Nhập | Đăng Ký</a>
+        </div>
+        </div>
+        <div class="hero">
+          <div class="hero-text">
+            <h1>Kiểm Tra Hạn Sử Dụng Nhanh Chóng & An Toàn</h1>
+            <p>ExpiryCheck giúp bạn quản lý, kiểm tra hạn sử dụng của sản phẩm một cách dễ dàng</p>
+            <a href="#" class="kiemtra feature-link">
+              <i class="fa-solid fa-magnifying-glass"></i> Kiểm Tra Ngay
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <section class="features">
+        <h2>Tính Năng Nổi Bật</h2>
+        <div class="cards">
+          <div class="card feature-link">
+            <i class="fa-solid fa-barcode"></i>
+            <h3>Kiểm tra sản phẩm</h3>
+            <p>Kiểm tra hạn sử dụng nhanh chóng và chính xác</p>
+          </div>
+          <div class="card feature-link">
+            <i class="fa-solid fa-bell"></i>
+            <h3>Nhắc Nhở Hạn Dùng</h3>
+            <p>Nhận thông báo khi sản phẩm hết hạn</p>
+          </div>
+          <div class="card feature-link">
+            <i class="fa-solid fa-box"></i>
+            <h3>Quản Lý Sản Phẩm</h3>
+            <p>Lưu trữ và theo dõi danh sách sản phẩm</p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>
+          <i class="fa-regular fa-copyright"></i> 2026 ExpiryCheck - Website Kiểm Tra Hạn Sử Dụng Của Sản Phẩm
+        </p>
+      </footer>
+      <script src = "auth.js"></script>
+      <script>
+        window.addEventListener("DOMContentLoaded", () => {
+          const user = getCurrentUser();
+          const navAuth = document.getElementById("navAuth");
+          if(user) {
+            navAuth.innerHTML = `
+            <div class = "user-menu">
+              <i class="fa-solid fa-user"></i>
+              <span>Xin chào, ${user.fullName} </span>  
+              <button id = "logoutBtn" class = "logoutBtn">Đăng xuất</button>
+            </div>
+            `;
+            document.getElementById("logoutBtn").addEventListener("click", () => {
+              logoutUser();
+              window.location.reload();
+            });
+          }
+        });
+        const featuresLinks = document.querySelectorAll(".feature-link");
+        for (let i = 0; i < featuresLinks.length; i++) {
+          featuresLinks[i].onclick = function (e) {
+              if (getCurrentUser() == null) {
+                  e.preventDefault();
+                  alert("Vui lòng đăng nhập để sử dụng");
+                  location.href = "dangnhap.html";
+              }
+        };
+      }
+      </script>
+    </body>
+  </html>

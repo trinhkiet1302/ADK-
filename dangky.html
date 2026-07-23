@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký ExpiryCheck</title>
+    <link rel="stylesheet" href="dangky.css">
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+</head>
+<body class = "login-body">
+    <div class = "login-box">
+        <div class = "login-logo">
+             <i class="fa-solid fa-calendar-check"></i>
+             <h2>ExpiryCheck</h2>
+        </div>
+        <h3>Đăng Ký Tài Khoản</h3>
+        <form id = "registerForm">
+            <div class = "input">
+                <i class="fa-solid fa-id-card"></i>
+                <input type = "text" id="fullName" placeholder = "Họ và tên" required>
+            </div>
+            <div class = "input">
+                <i class="fa-solid fa-user"></i>
+                <input type = "text" id="username" placeholder = "Tên đăng nhập" required>
+            </div>
+            <div class = "input">
+                <i class="fa-solid fa-envelope"></i>
+                <input type = "email" id="email" placeholder = "Email" required>
+            </div>
+            <div class = "input">
+                <i class="fa-solid fa-lock"></i>
+                <input type = "password" id="password" placeholder = "Mật khẩu" required>
+            </div>
+            <div class = "input">
+                <i class="fa-solid fa-lock"></i>
+                <input type = "password" id="confirmPassword" placeholder = "Nhập lại mật khẩu" required>
+            </div>
+            <p class = "error-msg" id = "errorMsg">
+               <button type = "submit">
+                    Đăng ký
+                </button>
+            <p>
+                Đã có tài khoản
+                <a href = "dangnhap.html">Đăng nhập</a>
+            </p>
+            </p>
+        </form>
+    </div>
+    <script src = "auth.js"></script>
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            // lấy dữ liệu người dùng nhập
+            const fullName = document.getElementById("fullName").value.trim();
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const errorEl = document.getElementById("errorMsg");
+            errorEl.textContent = " ";
+            if(!fullName || !username || !email || !password || !confirmPassword) {
+                errorEl.textContent = "Vui lòng nhập đủ thông tin";
+                return;
+            }
+            if(password.length <= 6) {
+                errorEl.textContent = "Vui lòng nhập mật khẩu trên 6 ký tự";
+                return;
+            }
+            if(password != confirmPassword) {
+                errorEl.textContent = "Mật khẩu không khớp";
+                return;
+            }
+            const result = registerUser(fullName, username, email, password);
+            if(!result.success) {
+                errorEl.textContent = result.message;
+                return;
+            }
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>
